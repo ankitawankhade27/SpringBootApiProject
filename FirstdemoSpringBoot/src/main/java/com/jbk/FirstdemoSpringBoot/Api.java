@@ -119,7 +119,7 @@ public class Api {
 	}
 	
 	
-	@PutMapping("updatecountrynamehb1")
+	@PutMapping("/updatecountrynamehb1")
 		public  ResponseEntity<String> updateCountryName(@RequestBody CountryUI country) {
 		System.out.println("update api is hitting");
 		System.out.println(country);
@@ -131,6 +131,23 @@ public class Api {
 			return new ResponseEntity<>("country updatd successfully", HttpStatus.OK);
 		 
 	 }
+	
+	@PutMapping("/updateEmployeeIdhb1")
+	public  ResponseEntity<String> updateEmployeeID(@RequestBody EmployeeUI employee) {
+		System.out.println("Employee update api is hitting");
+		System.out.println(employee);
+		Country con=new Country(employee.getCid(),employee.getCname());
+		EmployeeHibernate hb=new EmployeeHibernate(con,employee.getName(),employee.getPhoneno(),
+				employee.getDepartment(),employee.getStatus(),employee.getCreateddtm(),employee.getCreatedby(),
+				employee.getUpdateddtm(),employee.getUpdatedby());
+		
+	 Session session = sf.openSession();
+		Transaction tx=session.beginTransaction();
+		session.saveOrUpdate(hb);
+		tx.commit();
+		return new ResponseEntity<>("country updatd successfully", HttpStatus.OK);
+	 
+ }
 	
 	 @DeleteMapping("/deletebycountrynamehb1/{cname}")
 		public ResponseEntity<String> deletebyCountryName(@PathVariable("cname") String cname,CountryUI country) {
