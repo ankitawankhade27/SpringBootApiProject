@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
-import com.jbk.hibernatePOJO.Country;
+import com.jbk.hibernatePOJO.CountryHibernate;
 import com.jbk.hibernatePOJO.EmployeeHibernate;
 
 @Configuration
@@ -25,7 +25,7 @@ public class HibernateConfiguration {
 	{
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setConfigLocation(context.getResource("classpath:hibernate.cfg.xml"));
-		factoryBean.setAnnotatedClasses(EmployeeHibernate.class,Country.class);
+		factoryBean.setAnnotatedClasses(EmployeeHibernate.class,CountryHibernate.class);
 		return factoryBean;
 	}
 }

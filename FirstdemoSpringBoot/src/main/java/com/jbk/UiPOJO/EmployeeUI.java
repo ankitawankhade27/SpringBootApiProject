@@ -1,6 +1,7 @@
 package com.jbk.UiPOJO;
 
 public class EmployeeUI {
+	private int id;
 	private String name;
 	private String phoneno;
 	private String department;
@@ -27,6 +28,29 @@ public class EmployeeUI {
 		this.updatedby = updatedby;
 		this.cid = cid;
 		this.cname = cname;
+	}
+	
+	
+	public EmployeeUI(int id, String name, String phoneno, String department, String status, String createddtm,
+			String createdby, String updateddtm, String updatedby, int cid, String cname) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phoneno = phoneno;
+		this.department = department;
+		this.status = status;
+		this.createddtm = createddtm;
+		this.createdby = createdby;
+		this.updateddtm = updateddtm;
+		this.updatedby = updatedby;
+		this.cid = cid;
+		this.cname = cname;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -90,10 +114,9 @@ public class EmployeeUI {
 	}
 	@Override
 	public String toString() {
-		return "EmployeeUI [name=" + name + ", phoneno=" + phoneno + ", department=" + department + ", status=" + status
-				+ ", createddtm=" + createddtm + ", createdby=" + createdby + ", updateddtm=" + updateddtm
-				+ ", updatedby=" + updatedby + ", cid=" + cid + ", cname=" + cname + "]";
+		return "EmployeeUI [id=" + id + ", name=" + name + ", phoneno=" + phoneno + ", department=" + department
+				+ ", status=" + status + ", createddtm=" + createddtm + ", createdby=" + createdby + ", updateddtm="
+				+ updateddtm + ", updatedby=" + updatedby + ", cid=" + cid + ", cname=" + cname + "]";
 	}
 	
-
 }

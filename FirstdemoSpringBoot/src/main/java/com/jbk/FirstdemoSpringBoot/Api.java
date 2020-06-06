@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jbk.UiPOJO.CountryUI;
 import com.jbk.UiPOJO.EmployeeUI;
-import com.jbk.hibernatePOJO.Country;
+import com.jbk.hibernatePOJO.CountryHibernate;
 import com.jbk.hibernatePOJO.EmployeeHibernate;
 
 @RestController
@@ -93,7 +93,7 @@ public class Api {
 	public ResponseEntity<String> addEmployee(@RequestBody EmployeeUI emp) {
 		System.out.println("Add emp api is hiting");
 		System.out.println(emp);
-		Country country=new Country(emp.getCid(),emp.getCname());
+		CountryHibernate country=new CountryHibernate(emp.getCid(),emp.getCname());
 		EmployeeHibernate hb=new EmployeeHibernate(country,emp.getName(),emp.getPhoneno(),
 				emp.getDepartment(),emp.getStatus(),emp.getCreateddtm(),emp.getCreatedby(),emp.getUpdateddtm(),emp.getUpdatedby());
 		
@@ -109,7 +109,7 @@ public class Api {
 	public ResponseEntity<String> addCountry(@RequestBody CountryUI country) {
 		System.out.println("Country api is hitting");
 		System.out.println(country);
-		Country con=new Country(country.getCname());
+		CountryHibernate con=new CountryHibernate(country.getCname());
 		Session session = sf.openSession();
 		Transaction tx=session.beginTransaction();
 		session.save(con);
@@ -123,7 +123,7 @@ public class Api {
 		public  ResponseEntity<String> updateCountryName(@RequestBody CountryUI country) {
 		System.out.println("update api is hitting");
 		System.out.println(country);
-		 Country con=new Country(country.getCid(),country.getCname());
+		 CountryHibernate con=new CountryHibernate(country.getCid(),country.getCname());
 		 Session session = sf.openSession();
 			Transaction tx=session.beginTransaction();
 			session.saveOrUpdate(con);
@@ -136,7 +136,7 @@ public class Api {
 	public  ResponseEntity<String> updateEmployeeID(@RequestBody EmployeeUI employee) {
 		System.out.println("Employee update api is hitting");
 		System.out.println(employee);
-		Country con=new Country(employee.getCid(),employee.getCname());
+		CountryHibernate con=new CountryHibernate(employee.getCid(),employee.getCname());
 		EmployeeHibernate hb=new EmployeeHibernate(con,employee.getName(),employee.getPhoneno(),
 				employee.getDepartment(),employee.getStatus(),employee.getCreateddtm(),employee.getCreatedby(),
 				employee.getUpdateddtm(),employee.getUpdatedby());
@@ -149,28 +149,39 @@ public class Api {
 	 
  }
 	
-	 @DeleteMapping("/deletebycountrynamehb1/{cname}")
+	 @SuppressWarnings("unchecked")
+	@DeleteMapping("/deletebycountrynamehb1/{cname}")
 		public ResponseEntity<String> deletebyCountryName(@PathVariable("cname") String cname,CountryUI country) {
 		 System.out.println("Delete api is hitting");
-		 System.out.println(country);
-		 Country con=new Country(country.getCname());
 		 Session session = sf.openSession();
-		    Criteria criteria=session.createCriteria(Country.class);
+		    Criteria criteria=session.createCriteria(CountryHibernate.class);
 			criteria.add(Restrictions.eq("cname", cname));
-            Transaction tx=session.beginTransaction();
-			session.delete(con);
-			tx.commit();
+            List<CountryHibernate> list=criteria.list();
+            for(CountryHibernate ctr:list)
+            {
+	 			Transaction tx=session.beginTransaction();
+				session.delete(ctr);
+				tx.commit();
+				System.out.println("Country Deleted....");
+            }
 		 return new ResponseEntity<>("country deleted by name successfully", HttpStatus.OK);
 		 
 	 }
-	 @DeleteMapping("/deleteemployeebyidhb1/{id}")
-		public ResponseEntity<String> deletebyEmployeeId(@PathVariable("id") int id,EmployeeHibernate emp){
+	 @SuppressWarnings("unchecked")
+	@DeleteMapping("/deleteemployeebyidhb1/{id}")
+		public ResponseEntity<String> deletebyEmployeeId(@PathVariable("id") int id,EmployeeUI emp){
+		 System.out.println("Delete employee api is hitting");
 		 Session session = sf.openSession();
-		    Criteria criteria=session.createCriteria(Country.class);
+		    Criteria criteria=session.createCriteria(EmployeeHibernate.class);
 			criteria.add(Restrictions.eq("id", id));
+			 List<EmployeeHibernate> list=criteria.list();
+	            for(EmployeeHibernate employee:list)
+	            {
          Transaction tx=session.beginTransaction();
-			session.delete(emp);
+			session.delete(employee);
 			tx.commit();
+			System.out.println("employee deleted....");
+	            }
 		 return new ResponseEntity<>("employee deleted by id successfully", HttpStatus.OK);
 	 }
 

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  */
 @Entity
 @Table(name = "country", catalog = "firstdemospringboot")
-public class Country implements java.io.Serializable {
+public class CountryHibernate implements java.io.Serializable {
 
 	/**
 	 * 
@@ -29,20 +29,20 @@ public class Country implements java.io.Serializable {
 	private String cname;
 	private Set<EmployeeHibernate> employees = new HashSet<>();
 
-	public Country() {
+	public CountryHibernate() {
 	}
 
-	public Country(Integer cid, String cname) {
+	public CountryHibernate(Integer cid, String cname) {
 		super();
 		this.cid = cid;
 		this.cname = cname;
 	}
 
-	public Country(String cname) {
+	public CountryHibernate(String cname) {
 		this.cname = cname;
 	}
 
-	public Country(String cname, Set<EmployeeHibernate> employees) {
+	public CountryHibernate(String cname, Set<EmployeeHibernate> employees) {
 		this.cname = cname;
 		this.employees = employees;
 	}

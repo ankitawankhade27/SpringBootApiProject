@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jbk.hibernatePOJO.Country;
+import com.jbk.hibernatePOJO.CountryHibernate;
 import com.jbk.hibernatePOJO.EmployeeHibernate;
 
 @RestController
@@ -99,7 +99,7 @@ public class SpingBoot12ApiWithHibernate {
 	}
 	
 	@PostMapping("/addcountryhb")
-	public ResponseEntity<String> addCountry(@RequestBody Country country) {
+	public ResponseEntity<String> addCountry(@RequestBody CountryHibernate country) {
 		Session session = sf.openSession();
 		Transaction tx=session.beginTransaction();
 		session.save(country);
@@ -110,7 +110,7 @@ public class SpingBoot12ApiWithHibernate {
 	
 	
 	@PutMapping("/updatecountrynamehb")
-		public  ResponseEntity<String> updateCountryName(@RequestBody Country country) {
+		public  ResponseEntity<String> updateCountryName(@RequestBody CountryHibernate country) {
 		 
 		 Session session = sf.openSession();
 			Transaction tx=session.beginTransaction();
@@ -121,9 +121,9 @@ public class SpingBoot12ApiWithHibernate {
 	 }
 	
 	 @DeleteMapping("/deletebycountrynamehb/{cname}")
-		public ResponseEntity<String> deletebyCountryName(@PathVariable("cname") String cname,Country country) {
+		public ResponseEntity<String> deletebyCountryName(@PathVariable("cname") String cname,CountryHibernate country) {
 		 Session session = sf.openSession();
-		    Criteria criteria=session.createCriteria(Country.class);
+		    Criteria criteria=session.createCriteria(CountryHibernate.class);
 			criteria.add(Restrictions.eq("cname", cname));
             Transaction tx=session.beginTransaction();
 			session.delete(country);
@@ -134,7 +134,7 @@ public class SpingBoot12ApiWithHibernate {
 	 @DeleteMapping("/deleteemployeebyidhb/{id}")
 		public ResponseEntity<String> deletebyEmployeeId(@PathVariable("id") int id,EmployeeHibernate emp){
 		 Session session = sf.openSession();
-		    Criteria criteria=session.createCriteria(Country.class);
+		    Criteria criteria=session.createCriteria(CountryHibernate.class);
 			criteria.add(Restrictions.eq("id", id));
          Transaction tx=session.beginTransaction();
 			session.delete(emp);

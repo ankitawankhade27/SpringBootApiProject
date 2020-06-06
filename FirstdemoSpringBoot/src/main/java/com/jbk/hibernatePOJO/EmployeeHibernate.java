@@ -23,7 +23,7 @@ public class EmployeeHibernate implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8273897682508402856L;
 	private Integer id;
-	private Country country;
+	private CountryHibernate country;
 	private String name;
 	private String phoneno;
 	private String department;
@@ -36,7 +36,7 @@ public class EmployeeHibernate implements java.io.Serializable {
 	public EmployeeHibernate() {
 	}
 
-	public EmployeeHibernate(Country country, String name, String phoneno, String department, String status, String createddtm,
+	public EmployeeHibernate(CountryHibernate country, String name, String phoneno, String department, String status, String createddtm,
 			String createdby, String updateddtm, String updatedby) {
 		this.country = country;
 		this.name = name;
@@ -64,11 +64,11 @@ public class EmployeeHibernate implements java.io.Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cid", nullable = false)
 	
-	public Country getCountry() {
+	public CountryHibernate getCountry() {
 		return this.country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(CountryHibernate country) {
 		this.country = country;
 	}
 
