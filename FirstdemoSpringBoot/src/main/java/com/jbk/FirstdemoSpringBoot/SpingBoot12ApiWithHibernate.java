@@ -1,5 +1,6 @@
 package com.jbk.FirstdemoSpringBoot;
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,7 +24,7 @@ import com.jbk.hibernatePOJO.EmployeeHibernate;
 
 @RestController
 @CrossOrigin
-@RequestMapping("apii")
+@RequestMapping("/apii")
 public class SpingBoot12ApiWithHibernate {
 
 	@Autowired

@@ -77,6 +77,5 @@ public class CountryHibernate implements java.io.Serializable {
 		this.employees = employees;
 	}
 
-	
-	
+		
 }
